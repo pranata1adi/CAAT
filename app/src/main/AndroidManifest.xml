@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.aseps.caat">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_ccat"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".Features.Login.ChangePassword.GantiPasswordActivity"
+            android:label="Ganti Password" />
+        <activity
+            android:name=".Features.stackholder.StakeholderActivity"
+            android:label="Daftar Stakeholder" />
+        <activity
+            android:name=".Features.metode.MetodeActivity"
+            android:label="Metode Pengambilan Data" />
+        <activity android:name=".Features.kuisioner.KuisionerActivity" />
+        <activity android:name=".Features.wawancara.WawancaraActivity" />
+        <activity android:name=".Features.observasi.ObservasiActivity" />
+        <activity android:name=".Features.Login.Profil.MyProfilActivity" />
+        <activity android:name=".Features.Login.Login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Features.home.HomeActivity"
+            android:label="Proyek Saya"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="bb53b351c62ffeb79803756d82acabe1c44078c7" />
+    </application>
+</manifest>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_weight="1"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tvPertanyaan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:text="@string/pertanyaan"
+            tools:ignore="RtlHardcoded" />
+
+        <EditText
+            android:id="@+id/etAnswer1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="@string/_1"
+            android:inputType="number"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/etAnswer2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="@string/_2"
+            android:inputType="number"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/etAnswer3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="@string/_3"
+            android:inputType="number"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/etAnswer4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="@string/_4"
+            android:inputType="number"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/etAnswer5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="@string/_5"
+            android:inputType="number"
+            tools:ignore="Autofill" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/nilai_maksimal"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/tvNilaiMaksimal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/nilai_maksimal"
+            tools:ignore="RelativeOverlap" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/belum_ada_file"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageButton
+            android:id="@+id/ibUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_attach_file"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+</LinearLayout>
