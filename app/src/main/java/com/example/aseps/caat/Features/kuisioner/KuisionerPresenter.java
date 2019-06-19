@@ -108,17 +108,38 @@ class KuisionerPresenter {
                 params.put("question[]", itemKuisioner.getQuestion());
                 params.put("answer", "");
 
-                if (!String.valueOf(itemKuisioner.getJawaban1()).equals(""))
-                    params.put("weight1[0]", String.valueOf(itemKuisioner.getJawaban1()));
-                if (!String.valueOf(itemKuisioner.getJawaban2()).equals(""))
-                    params.put("weight2[0]", String.valueOf(itemKuisioner.getJawaban2()));
-                if (!String.valueOf(itemKuisioner.getJawaban3()).equals(""))
-                    params.put("weight3[0]", String.valueOf(itemKuisioner.getJawaban3()));
-                if (!String.valueOf(itemKuisioner.getJawaban4()).equals(""))
-                    params.put("weight4[0]", String.valueOf(itemKuisioner.getJawaban4()));
-                if (!String.valueOf(itemKuisioner.getJawaban5()).equals(""))
-                    params.put("weight5[0]", String.valueOf(itemKuisioner.getJawaban5()));
+                try {
+                    if (!String.valueOf(itemKuisioner.getJawaban1()).equals("")) {
+                        params.put("weight1[0]", String.valueOf(itemKuisioner.getJawaban1()));
+                        Log.d("jawaban1", String.valueOf(itemKuisioner.getJawaban1()));
+                    }
 
+
+                    if (!String.valueOf(itemKuisioner.getJawaban2()).equals("")) {
+                        params.put("weight2[0]", String.valueOf(itemKuisioner.getJawaban2()));
+
+                        Log.d("jawaban2", String.valueOf(itemKuisioner.getJawaban2()));
+                    }
+
+                    if (!String.valueOf(itemKuisioner.getJawaban3()).equals("")) {
+                        params.put("weight3[0]", String.valueOf(itemKuisioner.getJawaban3()));
+
+                        Log.d("jawaban3", String.valueOf(itemKuisioner.getJawaban3()));
+                    }
+
+                    if (!String.valueOf(itemKuisioner.getJawaban4()).equals("")) {
+                        params.put("weight4[0]", String.valueOf(itemKuisioner.getJawaban4()));
+
+                        Log.d("jawaban4", String.valueOf(itemKuisioner.getJawaban4()));
+                    }
+
+                    if (!String.valueOf(itemKuisioner.getJawaban5()).equals("")) {
+                        params.put("weight5[0]", String.valueOf(itemKuisioner.getJawaban5()));
+                        Log.d("jawaban5", String.valueOf(itemKuisioner.getJawaban5()));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
                 String date = sdf.format(new Date());
                 params.put("time", date);
