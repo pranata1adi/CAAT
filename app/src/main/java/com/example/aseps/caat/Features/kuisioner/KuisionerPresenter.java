@@ -156,32 +156,31 @@ class KuisionerPresenter {
                     e.printStackTrace();
                     Log.d("erorposkuis", e.toString());
                 }
+                Log.d("urlnye", URL + "/" + form + submit + idform);
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.post(URL + "/" + form + submit + idform, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        Log.d("poswawan", "sukses");
+                        try {
+                            JSONObject object = new JSONObject(new String(responseBody));
+                            Log.d("possukses", String.valueOf(object));
+                            String tru = object.getString("success");
+                            Log.d("possukses", tru);
+                            kuisionerView.postKuisionerCompleted(tru);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        kuisionerView.postKuisionerFailed(("Error: " + statusCode + ", Message: " + error.getMessage()));
+                        Log.d("eror", String.valueOf(error));
+                    }
+                });
             }
 
-            Log.d("urlnye", URL + "/" + form + submit + idform);
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.post(URL + "/" + form + submit + idform, params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    Log.d("poswawan", "sukses");
-                    try {
-                        JSONObject object = new JSONObject(new String(responseBody));
-                        Log.d("possukses", String.valueOf(object));
-                        String tru = object.getString("success");
-                        Log.d("possukses", tru);
-                        kuisionerView.postKuisionerCompleted(tru);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    kuisionerView.postKuisionerFailed(("Error: " + statusCode + ", Message: " + error.getMessage()));
-                    Log.d("eror", String.valueOf(error));
-                }
-            });
         } catch (Exception e) {
             e.printStackTrace();
         }

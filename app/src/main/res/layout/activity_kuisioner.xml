@@ -17,6 +17,18 @@
         android:text="@string/nomor_form"
         tools:ignore="RtlHardcoded" />
 
+    <EditText
+        android:id="@+id/etNama"
+        android:hint="@string/nama"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/tvJumlah"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        tools:ignore="LabelFor,RtlHardcoded,UnusedAttribute" />
+
     <TextView
         android:id="@+id/tvNamaMetode"
         android:layout_width="wrap_content"

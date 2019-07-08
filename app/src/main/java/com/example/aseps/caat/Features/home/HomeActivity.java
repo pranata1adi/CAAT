@@ -180,6 +180,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             myDatabase.addDB(itemHome1);
             if (idprojek.add(itemHome1.getId_project())) {
                 itemHomes.add(itemHome1);
+//                Log.d("itemhome",itemHome1.)
             }
         }
 

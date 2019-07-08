@@ -43,11 +43,11 @@ import static com.example.aseps.caat.helper.UrlAkses.URL;
 import static com.example.aseps.caat.helper.UrlAkses.download;
 
 public class KuisionerActivity extends AppCompatActivity implements KuisionerView, KuisionerAdapter.OnEditTextChanged {
-    EditText etMaksimal;
     String SourceFilname;
     int maksimal, position;
     KuisionerAdapter adapter;
     RecyclerView recyclerView;
+    EditText etMaksimal, etNama;
     Button btnTampilkan, btnSimpan;
     KuisionerPresenter kuisionerPresenter;
     TextView noForm, metode, tujuan, btnDownload;
@@ -61,6 +61,7 @@ public class KuisionerActivity extends AppCompatActivity implements KuisionerVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kuisioner);
 
+        etNama = findViewById(R.id.etNama);
         noForm = findViewById(R.id.tvNoForm);
         metode = findViewById(R.id.tvNamaMetode);
         btnSimpan = findViewById(R.id.btnSimpan);
@@ -77,12 +78,12 @@ public class KuisionerActivity extends AppCompatActivity implements KuisionerVie
         posisi = sp.getString("posisi", "");
         metod = sp.getString("metode", "");
         idform = sp.getString("id_form", "");
+        kuisionerPresenter.getKuisioner(idprojek, idaudit, posisi, metod, idform);
 
         btnTampilkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Integer.parseInt(etMaksimal.getText().toString()) != 0) {
-                    kuisionerPresenter.getKuisioner(idprojek, idaudit, posisi, metod, idform);
                     maksimal = Integer.parseInt(etMaksimal.getText().toString());
                 } else
                     Toast.makeText(KuisionerActivity.this, "Harap Isi Nilai Maksimal",
@@ -112,6 +113,7 @@ public class KuisionerActivity extends AppCompatActivity implements KuisionerVie
             tujuan.setText("Tujuan : " + itemKuisioner.getGoal());
             itemKuisioner.setMaksimal(maksimal);
             Log.d("maksimal", String.valueOf(maksimal));
+            Log.d("maksimal", String.valueOf(itemKuisioner.getJawaban1()));
         }
 
         adapter = new KuisionerAdapter(itemKuisionerArrayList, KuisionerActivity.this);
@@ -183,46 +185,50 @@ public class KuisionerActivity extends AppCompatActivity implements KuisionerVie
     }
 
     private void setDownload() {
-        btnDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("haha", "haha");
-                AsyncHttpClient client = new AsyncHttpClient();
-                RequestParams params = new RequestParams();
-                params.put("method", "Questionnaire");
+        try {
+            btnDownload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("haha", "haha");
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    RequestParams params = new RequestParams();
+                    params.put("method", "Questionnaire");
 
-                String[] fileType = {
-                        "application/pdf"
-                };
+                    String[] fileType = {
+                            "application/pdf"
+                    };
 
-                client.post(URL + download + idform, params, new BinaryHttpResponseHandler(fileType) {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] binaryData) {
-                        try {
-                            Log.d("haha", "hahas");
-                            SourceFilname = "api/form/download/" + idform;
+                    client.post(URL + download + idform, params, new BinaryHttpResponseHandler(fileType) {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] binaryData) {
+                            try {
+                                Log.d("haha", "hahas");
+                                SourceFilname = "api/form/download/" + idform;
 
-                            String DestinationName = SourceFilname.substring(SourceFilname.
-                                    lastIndexOf('/') + 1) + ".pdf";
-                            File _f = new File(Environment.getExternalStoragePublicDirectory(
-                                    Environment.DIRECTORY_DOWNLOADS), DestinationName);
-                            FileOutputStream output = new FileOutputStream(_f);
-                            output.write(binaryData);
-                            output.close();
-                            Toast.makeText(KuisionerActivity.this, dwl, Toast.LENGTH_SHORT).show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                                String DestinationName = SourceFilname.substring(SourceFilname.
+                                        lastIndexOf('/') + 1) + ".pdf";
+                                File _f = new File(Environment.getExternalStoragePublicDirectory(
+                                        Environment.DIRECTORY_DOWNLOADS), DestinationName);
+                                FileOutputStream output = new FileOutputStream(_f);
+                                output.write(binaryData);
+                                output.close();
+                                Toast.makeText(KuisionerActivity.this, dwl, Toast.LENGTH_SHORT).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] binaryData,
-                                          Throwable error) {
-                        Log.d("errordi", String.valueOf(error));
-                    }
-                });
-            }
-        });
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] binaryData,
+                                              Throwable error) {
+                            Log.d("errordi", String.valueOf(error));
+                        }
+                    });
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -285,10 +291,11 @@ public class KuisionerActivity extends AppCompatActivity implements KuisionerVie
                                 itemKuisioner.getJawaban3() + itemKuisioner.getJawaban4() +
                                 itemKuisioner.getJawaban5() > maksimal) {
                             Toast.makeText(KuisionerActivity.this, "Melebihi nilai maksimal", Toast.LENGTH_SHORT).show();
+                        } else if (etNama.getText().toString().equals("")) {
+                            Toast.makeText(KuisionerActivity.this, "Tidak BBoleh Kosong", Toast.LENGTH_SHORT).show();
                         } else {
                             Log.d("posberhasil", "berhasil");
-                            SharedPreferences sp = getSharedPreferences("profil", MODE_PRIVATE);
-                            String nama = sp.getString("name", "");
+                            String nama = etNama.getText().toString();
                             kuisionerPresenter.postKuisioner(idform, nama, itemKuisioners);
                         }
                     }
